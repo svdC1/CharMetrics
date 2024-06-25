@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'main',
-    'django-q',
+    'django_q',
 ]
 
 MIDDLEWARE = [
