@@ -1,9 +1,9 @@
 Django
 requests
-beautifulsoup4
+requests_html
+bs4
 django-q
 mysqlclient
 pandas
 numpy
 python-dotenv
-selenium
