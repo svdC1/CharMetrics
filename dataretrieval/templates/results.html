@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Metrics</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Optionally include Bootstrap for easier responsiveness -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon.ico' %}">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+
+    <!-- Android Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicons/android-chrome-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{% static 'images/favicons/android-chrome-512x512.png' %}">
+
+    <!-- Manifest file -->
+    <link rel="manifest" href="{% static 'images/favicons/site.webmanifest' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Creator Data</h1>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <p>Oops...Something Broke,Please reload the page.</p>
+        </div>
+        {% else %}
+        <p>Retrieved in {{retrieval_time}} seconds</p>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Total Messages</th>
+                        <th>Total Chats</th>
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                        <th>Date Published</th>
+                        <th>Last Updated</th>
+                        <th>Average Messages/Day</th>
+                        <th>Average Chats/Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for character in characters %}
+                    <tr>
+                        <td>{{ character.name }}</td>
+                        <td>{{ character.total_messages }}</td>
+                        <td>{{ character.total_chats }}</td>
+                        <td>{{ character.likes }}</td>
+                        <td>{{ character.dislikes }}</td>
+                        <td>{{ character.date_published }}</td>
+                        <td>{{ character.last_updated }}</td>
+                        <td>{{ character.avg_messages_day }}</td>
+                        <td>{{ character.avg_chats_day }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h1>Across All Characters</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Total Messages</th>
+                        <th>Total Chats</th>
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ sum.total_messages }}</td>
+                        <td>{{ sum.total_chats }}</td>
+                        <td>{{ sum.likes }}</td>
+                        <td>{{ sum.dislikes }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

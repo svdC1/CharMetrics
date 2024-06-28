@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Metrics</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Optionally include Bootstrap for easier responsiveness -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       .loading {
+           display: none;
+           position: fixed;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+       }
+       .loading img {
+           width: 100%;
+           max-width: 150px; /* Adjust the max-width as needed */
+       }
+   </style>
+   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
+   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}">
+   <link rel="icon" type="image/png" href="{% static 'images/favicons/favicon.ico' %}">
+
+   <!-- Apple Touch Icon -->
+   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}">
+
+   <!-- Android Icons -->
+   <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicons/android-chrome-192x192.png' %}">
+   <link rel="icon" type="image/png" sizes="512x512" href="{% static 'images/favicons/android-chrome-512x512.png' %}">
+
+   <!-- Manifest file -->
+   <link rel="manifest" href="{% static 'images/favicons/site.webmanifest' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Retrieve Creator Data</h1>
+        <form id='creatorForm' action="{% url 'results' %}" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" name="creator_name" placeholder="Enter creator name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Retrieve Data</button>
+        </form>
+        {% if error %}
+        <p class="error text-danger">{{ error }}</p>
+        {% endif %}
+    </div>
+    <div class="loading">
+       <img src="{% static 'images/loading.gif' %}" alt="Loading...">
+   </div>
+    <script>
+        document.getElementById('creatorForm').addEventListener('submit', function() {
+            document.querySelector('.loading').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
