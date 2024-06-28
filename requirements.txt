@@ -1,9 +1,6 @@
-Django
-requests
-requests_html
-bs4
-django-q
-mysqlclient
-pandas
-numpy
-python-dotenv
+beautifulsoup4==4.12.3
+Django==5.0.6
+pandas==2.2.2
+playwright==1.44.0
+Requests==2.32.3
+python-dotenv==1.0.0
