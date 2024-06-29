@@ -1,6 +1,6 @@
 # Python Django Project
 
-> ## [Website](svdc.pythonanywhere.com)
+> ## [Website](https://www.svdc.pythonanywhere.com)
 
 > # Expected Updates:
 > > **Make it faster**
