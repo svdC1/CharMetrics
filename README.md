@@ -3,9 +3,9 @@
 > ## [Website](https://svdc.pythonanywhere.com)
 
 > # Expected Updates:
-> > **Make it faster**
+> > _**Make it faster**_
 
-> > **Tags retrieval and analysis**
+> > _**Tags retrieval and analysis**_
 
 > # Maybe:
-> > **Add more tools regarding character creation**
+> > _**Add more tools regarding character creation**_
