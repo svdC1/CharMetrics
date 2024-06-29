@@ -18,7 +18,12 @@
        }
        .loading img {
            width: 100%;
-           max-width: 150px; /* Adjust the max-width as needed */
+           max-width: 150px;
+       }
+       .error-message{
+           color: red;
+           font-weight: bold;
+           display: block;
        }
    </style>
    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}">
@@ -38,23 +43,69 @@
 <body>
     <div class="container mt-5">
         <h1>Retrieve Creator Data</h1>
-        <form id='creatorForm' action="{% url 'results' %}" method="get">
+        <form id='creatorForm' action="{% url 'results_page' %}" method="get">
             <div class="form-group">
-                <input type="text" class="form-control" name="creator_name" placeholder="Enter creator name" required>
+                <input id='creator_name' type="text" class="form-control" name="creator_name" placeholder="Enter creator handle without '@'" required>
             </div>
             <button type="submit" class="btn btn-primary">Retrieve Data</button>
         </form>
         {% if error %}
-        <p class="error text-danger">{{ error }}</p>
+            <h3 class="error-message">{{ error }}</h3>
         {% endif %}
     </div>
-    <div class="loading">
+    <div id='loading' class="loading">
        <img src="{% static 'images/loading.gif' %}" alt="Loading...">
    </div>
     <script>
-        document.getElementById('creatorForm').addEventListener('submit', function() {
-            document.querySelector('.loading').style.display = 'block';
-        });
+      document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('creatorForm'); // Make sure you have the correct form ID
+    form.addEventListener('submit', submitForm);
+});
+
+async function submitForm(event) {
+    event.preventDefault();
+    const creatorNameInput = document.getElementById('creator_name');
+    const loadingElement = document.getElementById('loading');
+
+    if (!creatorNameInput) {
+        console.error('Creator name input element not found');
+        return;
+    }
+
+    const creatorName = creatorNameInput.value.trim(); // Trim to remove any extra spaces
+
+    if (!creatorName) {
+        alert('Please provide a creator handle');
+        return;
+    }
+
+    if (loadingElement) {
+        loadingElement.style.display = 'block';
+    }
+
+    try {
+        const response = await fetch(`/results/?creator_name=${encodeURIComponent(creatorName)}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        if (data.error) {
+            alert(data.error);
+        } else {
+            const taskId = data.task_id;
+            window.location.href = `/results_page/?task_id=${encodeURIComponent(taskId)}`;
+        }
+    } catch (error) {
+        console.error('Error occurred:', error);
+        alert('An error occurred while submitting the form.');
+    } finally {
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
+    }
+}
+
     </script>
 </body>
 </html>
